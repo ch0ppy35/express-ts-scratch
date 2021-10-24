@@ -1,13 +1,24 @@
 import express, { Request, Response } from 'express';
+import { Book } from '../models/book';
 
 const router = express.Router();
 
-router.get('/api/books', [], (req: Request, res: Response) => {
-  return res.send('Books!');
+router.get('/api/books', async (req: Request, res: Response) => {
+  const book = await Book.find({}, '-_id').select('title author');
+  console.log(book);
+  return res.status(200).send(book);
 });
 
-router.post('/api/books', (req, res) => {
-  return res.send('Added new book');
+router.post('/api/books', async (req: Request, res: Response) => {
+  const { title, author } = req.body;
+  try {
+    const book = Book.build({ title, author });
+    await book.save();
+    return res.status(201).send(book);
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send('bad request');
+  }
 });
 
 export { router as booksRouter };

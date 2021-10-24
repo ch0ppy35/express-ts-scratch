@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    depends_on:
+      - "mongo"
+    environment:
+      MONGOHOST: mongo
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo
+    restart: always
