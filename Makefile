@@ -1,6 +1,6 @@
 #Makefile
 
-.PHONY: run dev lint build clean install format
+.PHONY: run dev lint build clean cleanenv install format
 
 run:
 	npm start
@@ -15,6 +15,9 @@ build:
 	npm run build
 
 clean:
+	rm -rf dist/
+
+cleanenv:
 	rm -rf node_modules/
 	rm -rf dist/
 

@@ -10,5 +10,5 @@ services:
       - "3000:3000"
     restart: always
   mongo:
-    image: mongo
+    image: mongo:5.0-focal
     restart: always

@@ -21,4 +21,16 @@ router.post('/api/books', async (req: Request, res: Response) => {
   }
 });
 
+router.delete('/api/books', async (req: Request, res: Response) => {
+  const { title } = req.body;
+  try {
+    const book = await Book.findOneAndDelete({ title: title });
+    console.log(book);
+    return res.status(202).send('Request sent');
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send('Bad request');
+  }
+});
+
 export { router as booksRouter };
