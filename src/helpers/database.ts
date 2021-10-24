@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    const mongoHost = process.env.MONGOHOST || 'localhost';
-    const mongoURI = 'mongodb://' + mongoHost + ':27017/books';
+    const mongoHost: string = process.env.MONGOHOST || 'localhost';
+    const mongoURI: string = 'mongodb://' + mongoHost + ':27017/books';
     mongoose.connect(mongoURI, () => {
       console.log('Connected to mongo');
     });
