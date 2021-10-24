@@ -14,10 +14,10 @@ router.post('/api/books', async (req: Request, res: Response) => {
   try {
     const book = Book.build({ title, author });
     await book.save();
-    return res.status(201).send(book);
+    return res.status(201).send('Book added');
   } catch (error) {
     console.error(error);
-    return res.status(400).send('bad request');
+    return res.status(400).send('Bad request');
   }
 });
 

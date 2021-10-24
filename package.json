@@ -2,11 +2,11 @@
   "name": "first-express-app",
   "version": "1.0.0",
   "description": "My first express app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev src/index.ts",
+    "start": "ts-node src/server.ts",
+    "dev": "ts-node-dev src/server.ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "eslint": "eslint 'src/**/*.ts'"
   },
