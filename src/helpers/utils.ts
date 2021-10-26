@@ -18,5 +18,5 @@ export async function getWeather(city: string) {
       return false;
     }
   };
-  return makeRequest();
+  return await makeRequest();
 }
