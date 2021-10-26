@@ -1,28 +1,26 @@
-import axios from 'axios';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Router } from 'express';
+import { greet, getWeather } from '../helpers/utils';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
   return res.status(200).send('This is an api');
 });
 
-router.get('/healthz', async (req: Request, res: Response) => {
-  return res.status(200).send('OK');
+router.get('/greet/:name', async (req: Request, res: Response) => {
+  const name: string = req.params.name;
+  const message: string = greet(name, new Date());
+  return res.status(200).send(message);
 });
 
-router.get('/weather', async (req: Request, res: Response) => {
-  const url = 'https://wttr.in/Denver?format=3';
-  const getData = async (url: string) => {
-    try {
-      const response = await axios.get(url);
-      const data = response.data;
-      return res.status(200).send(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  getData(url);
+router.get('/weather/:city', async (req: Request, res: Response) => {
+  const city: string = req.params.city;
+  const weather = await getWeather(city);
+  return res.status(200).send(weather);
+});
+
+router.get('/healthz', async (req: Request, res: Response) => {
+  return res.status(200).send('OK');
 });
 
 export { router as indexRouter };

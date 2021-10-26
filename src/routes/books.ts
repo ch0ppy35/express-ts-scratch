@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Router } from 'express';
 import { Book } from '../models/book';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get('/api/books', async (req: Request, res: Response) => {
   const book = await Book.find({}, '-_id').select('title author');
