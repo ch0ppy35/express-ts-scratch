@@ -6,7 +6,8 @@ const router: Router = express.Router();
 router.get('/api/books', async (req: Request, res: Response) => {
   const book = await Book.find({}, '-_id').select('title author');
   console.log(book);
-  return res.status(200).send(book);
+  res.setHeader('Content-Type', 'application/json');
+  return res.status(200).send(JSON.stringify({ books: book }));
 });
 
 router.post('/api/books', async (req: Request, res: Response) => {
@@ -14,10 +15,12 @@ router.post('/api/books', async (req: Request, res: Response) => {
   try {
     const book = Book.build({ title, author });
     await book.save();
-    return res.status(201).send('Book added');
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(201).send(JSON.stringify({ message: 'Request Sent' }));
   } catch (error) {
     console.error(error);
-    return res.status(400).send('Bad request');
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(400).send(JSON.stringify({ message: 'Bad Request' }));
   }
 });
 
@@ -26,10 +29,12 @@ router.delete('/api/books', async (req: Request, res: Response) => {
   try {
     const book = await Book.findOneAndDelete({ title: title });
     console.log(book);
-    return res.status(202).send('Request sent');
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(202).send(JSON.stringify({ message: 'Request Sent' }));
   } catch (error) {
     console.error(error);
-    return res.status(400).send('Bad request');
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(400).send(JSON.stringify({ message: 'Bad Request' }));
   }
 });
 

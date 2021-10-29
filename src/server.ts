@@ -3,6 +3,7 @@ import { json } from 'body-parser';
 import connectDB from './helpers/database';
 import { indexRouter } from './routes/index';
 import { booksRouter } from './routes/books';
+import { weatherRouter } from './routes/weather';
 
 // Setup the app
 const app = express();
@@ -10,6 +11,7 @@ app.disable('x-powered-by');
 app.use(json());
 app.use(indexRouter);
 app.use(booksRouter);
+app.use(weatherRouter);
 
 app.listen(3000, () => {
   console.log('Server running on http://127.0.0.1:3000/');
